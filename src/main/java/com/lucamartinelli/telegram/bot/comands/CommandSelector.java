@@ -1,16 +1,21 @@
 package com.lucamartinelli.telegram.bot.comands;
 
+import com.lucamartinelli.telegram.bot.comands.calc.CalcCommand;
+import com.lucamartinelli.telegram.bot.comands.calc.SumCommand;
 import com.lucamartinelli.telegram.bot.comands.media.asciiart.AsciiArtCommand;
 import com.lucamartinelli.telegram.bot.comands.random.AphorismCommand;
 import com.lucamartinelli.telegram.bot.comands.random.CoinCommand;
 import com.lucamartinelli.telegram.bot.comands.random.DiceCommand;
 import com.lucamartinelli.telegram.bot.comands.random.JokeCommand;
+import com.lucamartinelli.telegram.bot.comands.random.RandCharCommand;
 import com.lucamartinelli.telegram.bot.comands.simple.def.DefaultCommand;
 import com.lucamartinelli.telegram.bot.comands.simple.help.HelpCommand;
 import com.lucamartinelli.telegram.bot.comands.simple.info.InfoCommand;
 import com.lucamartinelli.telegram.bot.comands.simple.pinfo.PersonalInfoCommand;
 import com.lucamartinelli.telegram.bot.comands.simple.start.StartCommand;
+import com.lucamartinelli.telegram.bot.comands.simple.sticker.StickerCommand;
 import com.lucamartinelli.telegram.bot.comands.simple.test.TestCommand;
+import com.lucamartinelli.telegram.bot.comands.simple.time.TimeCommand;
 import com.lucamartinelli.telegram.bot.vo.ChatSession;
 import com.pengrad.telegrambot.model.Update;
 
@@ -66,12 +71,20 @@ public class CommandSelector {
         		break;
 
         	case ("/sticker"):
+        		command = new StickerCommand(session, update);
+        		break;
 
         	case ("/ora"):
+        		command = new TimeCommand(session, update);
+        		break;
 
         	case ("/calc"):
+        		command = new CalcCommand(session, update);
+    			break;
 
         	case ("/+"):
+        		command = new SumCommand(session, update);
+				break;
 
         	case ("/-"):
         
@@ -88,6 +101,8 @@ public class CommandSelector {
         	case ("/media"):
         
         	case ("/letterarand"):
+        		command = new RandCharCommand(session, update);
+        		break;
         
         	case ("/moneta"):
         		command = new CoinCommand(session, update);

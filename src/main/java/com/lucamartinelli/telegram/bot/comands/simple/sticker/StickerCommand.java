@@ -7,6 +7,7 @@ import java.util.Random;
 import com.lucamartinelli.telegram.bot.comands.BotCommand;
 import com.lucamartinelli.telegram.bot.vo.ChatSession;
 import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.request.SendSticker;
 
 public class StickerCommand extends BotCommand {
 
@@ -26,7 +27,7 @@ public class StickerCommand extends BotCommand {
 		log.debugf("Sending sticker in the %d position", randomIndex);
 		final String sticker = this.stickersSet.get(randomIndex);
 		log.debugf("Stiker ID: %s", sticker);
-		sendMessage(chatID, sticker);
+		ellie.execute(new SendSticker(chatID, sticker));
 		return 0;
 	}
 	

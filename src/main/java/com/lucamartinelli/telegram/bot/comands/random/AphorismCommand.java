@@ -13,10 +13,12 @@ import com.pengrad.telegrambot.model.Update;
 public class AphorismCommand extends BotCommand {
 	
 	private final Random random;
+	private long totalRows;
 
 	public AphorismCommand(ChatSession chatSession, Update update) {
 		super(chatSession, update);
 		this.random = new Random();
+		init();
 	}
 
 	@Override
@@ -39,7 +41,6 @@ public class AphorismCommand extends BotCommand {
 	
 	private String readLine() {
 		try (Stream<String> lines = Files.lines(loadAphorismFile().toPath())) {
-			final long totalRows = lines.count();
 			final long previousSelected = random.nextLong(totalRows);
 			if (previousSelected == 0)
 				return lines.findFirst().get();
@@ -48,6 +49,16 @@ public class AphorismCommand extends BotCommand {
 			log.error("Reading battute file error: ", e);
 			return null;
 		}
+	}
+	
+	private void init() {
+		try (Stream<String> lines = Files.lines(loadAphorismFile().toPath())) {
+			this.totalRows = lines.count();
+		} catch (IOException e) {
+			log.error("Reading battute file error: ", e);
+			this.totalRows = -1L;
+		}
+		log.debug("Total lines in files: " + this.totalRows);
 	}
 
 }

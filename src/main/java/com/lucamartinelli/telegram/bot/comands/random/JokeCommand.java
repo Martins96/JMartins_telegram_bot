@@ -13,14 +13,23 @@ import com.pengrad.telegrambot.model.Update;
 public class JokeCommand extends BotCommand {
 	
 	private final Random random;
+	private long totalRows;
 
 	public JokeCommand(ChatSession chatSession, Update update) {
 		super(chatSession, update);
 		this.random = new Random();
+		init();
 	}
+
+	
 
 	@Override
 	protected int run() {
+		if (this.totalRows < 0) {
+			log.debug("Cannot read total lines from joke file, file is not accessible");
+			return -1;
+		}
+		
 		final String joke = readLine();
 		if (joke == null) {
 			log.error("Something going wrong in the file load, cannot send any message");
@@ -39,15 +48,27 @@ public class JokeCommand extends BotCommand {
 	
 	private String readLine() {
 		try (Stream<String> lines = Files.lines(loadBattuteFile().toPath())) {
-			final long totalRows = lines.count();
+			log.debug("Generating random joke number");
 			final long previousSelected = random.nextLong(totalRows);
 			if (previousSelected == 0)
 				return lines.findFirst().get();
+			log.debugf("Sending joke number [%d]", previousSelected+1);
 		    return lines.skip(previousSelected).findFirst().get();
 		} catch (IOException e) {
 			log.error("Reading battute file error: ", e);
 			return null;
 		}
+	}
+	
+	
+	private void init() {
+		try (Stream<String> lines = Files.lines(loadBattuteFile().toPath())) {
+			this.totalRows = lines.count();
+		} catch (IOException e) {
+			log.error("Reading battute file error: ", e);
+			this.totalRows = -1L;
+		}
+		log.debug("Total lines in files: " + this.totalRows);
 	}
 
 }
