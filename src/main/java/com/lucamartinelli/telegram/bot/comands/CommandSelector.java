@@ -1,6 +1,12 @@
 package com.lucamartinelli.telegram.bot.comands;
 
 import com.lucamartinelli.telegram.bot.comands.calc.CalcCommand;
+import com.lucamartinelli.telegram.bot.comands.calc.DiffCommand;
+import com.lucamartinelli.telegram.bot.comands.calc.DivCommand;
+import com.lucamartinelli.telegram.bot.comands.calc.MidCommand;
+import com.lucamartinelli.telegram.bot.comands.calc.MultipCommand;
+import com.lucamartinelli.telegram.bot.comands.calc.RandCommand;
+import com.lucamartinelli.telegram.bot.comands.calc.SqrtCommand;
 import com.lucamartinelli.telegram.bot.comands.calc.SumCommand;
 import com.lucamartinelli.telegram.bot.comands.media.asciiart.AsciiArtCommand;
 import com.lucamartinelli.telegram.bot.comands.random.AphorismCommand;
@@ -87,18 +93,30 @@ public class CommandSelector {
 				break;
 
         	case ("/-"):
+        		command = new DiffCommand(session, update);
+				break;
         
         	case ("/x"):
         	case ("/*"):
+        		command = new MultipCommand(session, update);
+				break;
         
         	case ("/:"):
         	case ("//"):
+        		command = new DivCommand(session, update);
+				break;
         
         	case ("/sqrt"):
+        		command = new SqrtCommand(session, update);
+				break;
         
         	case ("/rand"):
+        		command = new RandCommand(session, update);
+				break;
         
         	case ("/media"):
+        		command = new MidCommand(session, update);
+				break;
         
         	case ("/letterarand"):
         		command = new RandCharCommand(session, update);

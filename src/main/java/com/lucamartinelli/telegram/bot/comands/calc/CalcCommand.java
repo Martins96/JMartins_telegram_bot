@@ -39,24 +39,44 @@ public class CalcCommand extends BotCommand {
 		final String input = newUpdate.message().text();
 		log.debug("Input for resuming Calc command: " + input);
 		
-		switch (input.split(" ", 2)[0]) {
+		if (input.split(" ", 2)[0] == null) {
+			sendMessage(chatID, "Input non gestibile, termino il comando Calcolatrice");
+			log.debug("Input not manageable for Calc command, exiting from command");
+
+			chatSession.resetIncompleteCommand();
+			return 1;
+		}
+		
+		BotCommand cmd;
+		switch (input.split(" ", 2)[0].toLowerCase()) {
 		case "/+":
-			BotCommand cmd = new SumCommand(chatSession, newUpdate);
+			cmd = new SumCommand(chatSession, newUpdate);
 			cmd.executeCommand();
 			chatSession = cmd.getSession();
 			break;
 		case "/-":
-
+			cmd = new DiffCommand(chatSession, newUpdate);
+			cmd.executeCommand();
+			chatSession = cmd.getSession();
 			break;
 		case "/x":
-
+			cmd = new MultipCommand(chatSession, newUpdate);
+			cmd.executeCommand();
+			chatSession = cmd.getSession();
 			break;
+
 		case "/:":
-
+			cmd = new DivCommand(chatSession, newUpdate);
+			cmd.executeCommand();
+			chatSession = cmd.getSession();
 			break;
+
 		case "/sqrt":
-
+			cmd = new SqrtCommand(chatSession, newUpdate);
+			cmd.executeCommand();
+			chatSession = cmd.getSession();
 			break;
+
 		case "/exit":
 			sendMessage(chatID, "Uscita dal comando Calcolatrice");
 			chatSession.resetIncompleteCommand();
