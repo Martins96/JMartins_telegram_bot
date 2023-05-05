@@ -15,11 +15,13 @@ public class ChatSession implements Serializable{
 	private String username;
 	private boolean commandFlowIncomplete;
 	private BotCommand processingCommand;
+	private LoggedRolesEnum loggedinRole;
 	
 	public ChatSession() {
 		this.userid = null;
 		this.commandFlowIncomplete = false;
 		this.processingCommand = null;
+		this.loggedinRole = null;
 	}
 	
 	
@@ -62,6 +64,12 @@ public class ChatSession implements Serializable{
 	public void resetIncompleteCommand() {
 		this.commandFlowIncomplete = false;
 		this.processingCommand = null;
+	}
+	public LoggedRolesEnum getLoggedinRole() {
+		return loggedinRole;
+	}
+	public void setLoggedinRole(LoggedRolesEnum loggedinRole) {
+		this.loggedinRole = loggedinRole;
 	}
 	
 	

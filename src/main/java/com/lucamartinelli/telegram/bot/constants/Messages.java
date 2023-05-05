@@ -34,6 +34,12 @@ public class Messages {
 			+ "\n/personalinfo\nvisualizza informazioni personali\n"
 			+ "\n/botinfo\nvisualizza informazioni del bot\n"
 			+ "------------------------------------";
+	public static final String MYLADY_HELP = "Lista:\n"
+			+ "/postino\ninvio un messaggio ad un utente, sintassi da seguire:\n/postino 'id destinatario' 'testo del messaggio da inviare'\n"
+			+ "/myladyimage\ninvia un'immagine dolce quanto la mamma\n"
+			+ "/system\n invia un messaggio pulito ad un utente, per visualizzare più info digita '/system help'\n"
+			+ "/shutdown\nMi mandi a nanna\n"
+			+ "/myladyexit\nesci dalla modalità mamma\n";
 	
 	
 }

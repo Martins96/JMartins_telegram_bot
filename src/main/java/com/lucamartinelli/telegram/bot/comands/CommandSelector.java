@@ -1,5 +1,6 @@
 package com.lucamartinelli.telegram.bot.comands;
 
+import com.lucamartinelli.telegram.bot.comands.admin.login.LoginAdmin;
 import com.lucamartinelli.telegram.bot.comands.calc.CalcCommand;
 import com.lucamartinelli.telegram.bot.comands.calc.DiffCommand;
 import com.lucamartinelli.telegram.bot.comands.calc.DivCommand;
@@ -9,6 +10,8 @@ import com.lucamartinelli.telegram.bot.comands.calc.RandCommand;
 import com.lucamartinelli.telegram.bot.comands.calc.SqrtCommand;
 import com.lucamartinelli.telegram.bot.comands.calc.SumCommand;
 import com.lucamartinelli.telegram.bot.comands.media.asciiart.AsciiArtCommand;
+import com.lucamartinelli.telegram.bot.comands.mylady.help.MyLadyHelpCommand;
+import com.lucamartinelli.telegram.bot.comands.mylady.login.LoginMyLady;
 import com.lucamartinelli.telegram.bot.comands.random.AphorismCommand;
 import com.lucamartinelli.telegram.bot.comands.random.CoinCommand;
 import com.lucamartinelli.telegram.bot.comands.random.DiceCommand;
@@ -22,6 +25,7 @@ import com.lucamartinelli.telegram.bot.comands.simple.start.StartCommand;
 import com.lucamartinelli.telegram.bot.comands.simple.sticker.StickerCommand;
 import com.lucamartinelli.telegram.bot.comands.simple.test.TestCommand;
 import com.lucamartinelli.telegram.bot.comands.simple.time.TimeCommand;
+import com.lucamartinelli.telegram.bot.comands.user.login.LogoutCommand;
 import com.lucamartinelli.telegram.bot.vo.ChatSession;
 import com.pengrad.telegrambot.model.Update;
 
@@ -129,32 +133,37 @@ public class CommandSelector {
         	case ("/dado"):
         		command = new DiceCommand(session, update);
         		break;
+        		
+        	case ("/logout"):
+        		command = new LogoutCommand(session, update);
+        		break;
 
         	case ("/user"): 
 
         	case ("/userhelp"):
-        
-        	case ("/userexit"):
+        		
         
         	case ("/mylady"): 
+        		command = new LoginMyLady(session, update);
+        		break;
 
         	case ("/myladyhelp"):
+        		command = new MyLadyHelpCommand(session, update);
+    			break;
         
         	case ("/myladyimage"):
-
-        	case ("/myladyexit"):
 
         	case ("/love"):
         
         	case ("/admin"): 
+        		command = new LoginAdmin(session, update);
+        		break;
 
         	case ("/adminhelp"):
 
         	case ("/hddlist"):
 
         	case ("/adminimage"): 
-
-        	case ("/adminexit"):
 
         	case ("/shutdown"):
         
@@ -192,7 +201,7 @@ public class CommandSelector {
         
         	case ("/sassocartaforbice"):
 
-        	case("/catsimulator"):
+        	case ("/catsimulator"):
 
         	case ("/storygame"):
         

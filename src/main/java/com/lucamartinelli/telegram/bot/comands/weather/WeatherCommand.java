@@ -15,5 +15,12 @@ public class WeatherCommand extends BotCommand {
 		sendMessage(chatID, "Il comando è in via di sviluppo");
 		return 0;
 	}
+	
+	
+	
+	@Override
+	public int resumeExecution(Update newUpdate) {
+		return -1;
+	}
 
 }

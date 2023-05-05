@@ -62,6 +62,7 @@ public abstract class BotCommand {
 				return null;
 			}
 		}
+		log.infof("Sending message to [%s] with text: %s", Long.toString(chatID), text);
 		return this.ellie.execute(new SendMessage(chatID, text));
 	}
 	
