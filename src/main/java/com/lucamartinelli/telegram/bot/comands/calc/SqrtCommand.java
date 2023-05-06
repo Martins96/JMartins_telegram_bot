@@ -89,7 +89,7 @@ public class SqrtCommand extends BotCommand {
 		
 		log.debug("sqrt for input: " + input);
 		String[] iSplitted = input.split(" ");
-		if (iSplitted.length != 2) {
+		if (iSplitted.length > 1) {
 			log.debugf("Input [%s] not contains a number", input);
 			sendMessage(chatID, "L'input non è gestibile, manda solo un numero");
 			return 1;
@@ -104,7 +104,7 @@ public class SqrtCommand extends BotCommand {
 		}
 		
 		
-		BigDecimal sqrt = new BigDecimal(iSplitted[0]).sqrt(new MathContext(10));
+		BigDecimal sqrt = new BigDecimal(iSplitted[0]).sqrt(new MathContext(15));
 		log.debugf("Square root for %s is %s ", input, sqrt.toString());
 		
 		sendMessage(chatID, "La radice quadrata è: " + sqrt.toString() + "\n Sqrt conclusa, termino il comando");

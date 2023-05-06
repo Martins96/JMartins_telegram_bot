@@ -105,7 +105,7 @@ public class DivCommand extends BotCommand {
 		}
 		
 		
-		BigDecimal diff = new BigDecimal(iSplitted[0]).subtract(new BigDecimal(iSplitted[1]));
+		BigDecimal diff = new BigDecimal(iSplitted[0]).divide(new BigDecimal(iSplitted[1]));
 		log.debugf("Div for %s is %s ", input, iSplitted.toString());
 		
 		log.debugf("Final div for %s is %s", input, diff.toString());

@@ -18,7 +18,7 @@ public class MyLadyHelpCommand extends BotCommand {
 		if (chatSession.getLoggedinRole() != LoggedRolesEnum.MYLADY) {
 			log.infof("User with ID [%s] tried to invoke Mylady help command without "
 					+ "be logged in", Long.toString(chatID));
-			sendMessage(chatID, "Non ti ho ancora utorizzato ad usare questo comando, prima "
+			sendMessage(chatID, "Non ti ho ancora autorizzato ad usare questo comando, prima "
 					+ "autenticati con il comando /mylady");
 			return 1;
 		}

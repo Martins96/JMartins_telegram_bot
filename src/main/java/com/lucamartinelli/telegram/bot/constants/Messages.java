@@ -39,7 +39,7 @@ public class Messages {
 			+ "/myladyimage\ninvia un'immagine dolce quanto la mamma\n"
 			+ "/system\n invia un messaggio pulito ad un utente, per visualizzare più info digita '/system help'\n"
 			+ "/shutdown\nMi mandi a nanna\n"
-			+ "/myladyexit\nesci dalla modalità mamma\n";
+			+ "/logout\nRimuovo l'autorizzazione di mylady\n";
 	
 	
 }

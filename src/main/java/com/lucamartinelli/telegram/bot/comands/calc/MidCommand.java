@@ -94,14 +94,14 @@ public class MidCommand extends BotCommand {
 		String[] iSplitted = input.split(" ");
 		List<String> errStrings = new ArrayList<>();
 		List<BigDecimal> numbers = new ArrayList<>();
-		final BigDecimal total = new BigDecimal(0);
+		BigDecimal[] total = new BigDecimal[] {new BigDecimal(0)};
 		Arrays.asList(iSplitted).forEach(e -> {
 			e = e.replace(',', '.');
 			try {
-				Float.parseFloat(input);
+				Float.parseFloat(e);
 				final BigDecimal num = new BigDecimal(e);
 				numbers.add(num);
-				total.add(num);
+				total[0] = total[0].add(num);
 			} catch (NumberFormatException ex) {
 				log.debug(e + " is not a number");
 				errStrings.add(e);
@@ -114,8 +114,9 @@ public class MidCommand extends BotCommand {
 					+ Arrays.toString(errStrings.toArray(new String[0])));
 		}
 		if (numbers.size() > 0) {
-			BigDecimal middle = total.divide(new BigDecimal(numbers.size(), new MathContext(10)));
-			log.debugf("Square root for %s is %s ", input, middle.toString());
+			log.debugf("Performing divide %s of %d", total[0].toString(), numbers.size());
+			BigDecimal middle = total[0].divide(new BigDecimal(numbers.size()), new MathContext(10));
+			log.debugf("Median for %s is %s ", input, middle.toString());
 			
 			sendMessage(chatID, "La media è: " + middle.toString() + "\n Media conclusa, termino il comando");
 			return 0;

@@ -2,6 +2,7 @@ package com.lucamartinelli.telegram.bot.comands.user.login;
 
 import com.lucamartinelli.telegram.bot.comands.BotCommand;
 import com.lucamartinelli.telegram.bot.vo.ChatSession;
+import com.lucamartinelli.telegram.bot.vo.LoggedRolesEnum;
 import com.pengrad.telegrambot.model.Update;
 
 public class LogoutCommand extends BotCommand {
@@ -19,9 +20,25 @@ public class LogoutCommand extends BotCommand {
 			return 1;
 		}
 		
-		log.debug("Old role was " + chatSession.getLoggedinRole().toString());
+		final LoggedRolesEnum oldRole = chatSession.getLoggedinRole();
+		
+		log.debug("Old role was " + oldRole);
 		chatSession.setLoggedinRole(null);
-		sendMessage(chatID, "Logout eseguita correttamente, ciao!");
+		
+		
+		if (oldRole == LoggedRolesEnum.MYLADY) {
+			log.debug("User with role mylady logging out");
+			sendMessage(chatID, "Ciao mamma, spero di risentirti presto, buona giornata 😘❤");
+		}
+		if (oldRole == LoggedRolesEnum.ADMIN) {
+			log.debug("User with role admin logging out");
+			sendMessage(chatID, "Ciao papà, pulisco la sessione, stammi bene! 😘❤");
+		}
+		if (oldRole == LoggedRolesEnum.USER) {
+			log.debug("User with role user logging out");
+			sendMessage(chatID, "Logout eseguita correttamente, ciao!");
+		}
+		
 		return 0;
 	}
 

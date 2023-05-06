@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.lucamartinelli.telegram.bot.comands.BotCommand;
 import com.lucamartinelli.telegram.bot.vo.ChatSession;
@@ -82,6 +83,7 @@ public class MultipCommand extends BotCommand {
 		log.debug("Multip for input: " + input);
 		List<String> iSplitted = Arrays.asList(input.split(" "));
 		log.debugf("Multip for %d numbers", iSplitted.size());
+		AtomicBoolean isOneInputGood = new AtomicBoolean(false);
 		iSplitted.forEach(s -> {
 			try {
 				if (s != null) {
@@ -89,6 +91,7 @@ public class MultipCommand extends BotCommand {
 					Float.parseFloat(s);
 					log.debug("Adding " + s);
 					multip[0] = multip[0].multiply(new BigDecimal(s));
+					isOneInputGood.set(true);
 				}
 			} catch (NumberFormatException e) {
 				log.debug(s + " is not a number");
@@ -99,8 +102,12 @@ public class MultipCommand extends BotCommand {
 			sendMessage(chatID, "Non sono riuscita a comprendere i numeri: " 
 					+ Arrays.toString(errStrings.toArray(new String[0])));
 		}
-		log.debug("Final multip is: " + multip[0].toString());
-		sendMessage(chatID, "Il prodotto è: " + multip[0].toString() + "\n Moltiplicazione conclusa, termino il comando");
+		if (isOneInputGood.get()) {
+			log.debug("Final multip is: " + multip[0].toString());
+			sendMessage(chatID, "Il prodotto è: " + multip[0].toString() + "\n Moltiplicazione conclusa, termino il comando");
+		} else {
+			sendMessage(chatID, "Nessun input per generare il prodotto");
+		}
 		
 	}
 
