@@ -1,5 +1,6 @@
-package com.lucamartinelli.telegram.bot.comands.admin.login;
+package com.lucamartinelli.telegram.bot.comands.user.login;
 
+import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.ConfigProvider;
 
 import com.lucamartinelli.telegram.bot.commands.BotCommand;
@@ -8,19 +9,13 @@ import com.lucamartinelli.telegram.bot.vo.LoggedRolesEnum;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.DeleteMessage;
 
-public class LoginAdmin extends BotCommand {
+public class UserLoginCommand extends BotCommand {
 	
-	private final String adminPassword;
-
-	public LoginAdmin(ChatSession chatSession, Update update) {
+	private final Config config;
+	
+	public UserLoginCommand(ChatSession chatSession, Update update) {
 		super(chatSession, update);
-		this.adminPassword = ConfigProvider.getConfig()
-				.getOptionalValue("admin.password", String.class)
-				.orElseGet(() -> {
-					log.warn("No password set on the properties file for admin role, "
-							+ "using default one");
-					return "Password123";
-				});
+		this.config = ConfigProvider.getConfig();
 	}
 
 	@Override
@@ -37,7 +32,7 @@ public class LoginAdmin extends BotCommand {
 			
 		} else {
 			log.debug("User is not logged in, asking password");
-			sendMessage(chatID, "Papà? Sei tu?");
+			sendMessage(chatID, "Ehilà! Per autenticarti scrivimi la tua parola segreta");
 			chatSession.setCommandFlowIncomplete(true);
 			chatSession.setProcessingCommand(this);
 		}
@@ -50,7 +45,7 @@ public class LoginAdmin extends BotCommand {
 	@Override
 	public int resumeExecution(Update newUpdate) {
 		if (newUpdate == null || newUpdate.message() == null || newUpdate.message().text() == null) {
-			log.debug("Input not valid for access to Admin mode, exiting...");
+			log.debug("Input not valid for access to User mode, exiting...");
 			sendMessage(chatID, "Ciò che hai mandato non può essere considerato una password, "
 					+ "termino il comando");
 			chatSession.resetIncompleteCommand();
@@ -64,23 +59,35 @@ public class LoginAdmin extends BotCommand {
 			return 1;
 		}
 		
-		if (this.adminPassword.equals(this.text)) {
-			log.debug("Password match, setting session for Admin user");
-			log.infof("User %s with username %s gain the ADMIN role", 
-					chatID, newUpdate.message().from().username());
-			chatSession.resetIncompleteCommand();
-			chatSession.setLoggedinRole(LoggedRolesEnum.ADMIN);
-			sendMessage(chatID, "Papà! ❤😍😘❤");
-			ellie.execute(new DeleteMessage(chatID, newUpdate.message().messageId()));
-			return 0;
-		} else {
+		final String keyProperty = newUpdate.message().text().concat(".user.secret");
+		final String usernameProperty = this.config.getOptionalValue(keyProperty, String.class)
+				.orElse(null);
+		
+		
+		
+		if (usernameProperty == null) {
 			log.debug("Password NOT match, exiting comand");
-			log.infof("User %s with username %s used a wrong password for admin login", 
+			log.infof("User %s with username %s used a wrong password for user login", 
 					chatID, newUpdate.message().from().username());
 			chatSession.resetIncompleteCommand();
-			sendMessage(chatID, "Mmm... non sono d'accordo, la password che hai inserito non "
-					+ "è quella che mi aspettavo, termino il comando");
+			sendMessage(chatID, "Mi dispiace, ma la parola segreta che hai inserito non "
+					+ "la conosco.");
 			return 2;
 		}
+		
+
+		log.debug("Password match, setting session for user role");
+		log.infof("User %s with username %s gain the USER role. Welcome %s", 
+				chatID, newUpdate.message().from().username(), usernameProperty);
+		chatSession.resetIncompleteCommand();
+		chatSession.setLoggedinRole(LoggedRolesEnum.USER);
+		sendMessage(chatID, "Benvenuto " + usernameProperty + ", è un piacere sentirti. \n"
+				+ "Se ti serve aiuto con la lista dei comandi disponibili esclusivi da utente "
+				+ "loggato digita /userhelp");
+		ellie.execute(new DeleteMessage(chatID, newUpdate.message().messageId()));
+		return 0;
+		
+		
 	}
+
 }

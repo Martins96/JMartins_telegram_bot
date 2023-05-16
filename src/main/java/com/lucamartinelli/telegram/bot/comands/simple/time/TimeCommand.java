@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-import com.lucamartinelli.telegram.bot.comands.BotCommand;
+import com.lucamartinelli.telegram.bot.commands.BotCommand;
 import com.lucamartinelli.telegram.bot.vo.ChatSession;
 import com.pengrad.telegrambot.model.Update;
 

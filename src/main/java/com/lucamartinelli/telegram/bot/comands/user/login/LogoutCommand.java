@@ -1,6 +1,6 @@
 package com.lucamartinelli.telegram.bot.comands.user.login;
 
-import com.lucamartinelli.telegram.bot.comands.BotCommand;
+import com.lucamartinelli.telegram.bot.commands.BotCommand;
 import com.lucamartinelli.telegram.bot.vo.ChatSession;
 import com.lucamartinelli.telegram.bot.vo.LoggedRolesEnum;
 import com.pengrad.telegrambot.model.Update;

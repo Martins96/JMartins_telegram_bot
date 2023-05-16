@@ -2,7 +2,7 @@ package com.lucamartinelli.telegram.bot.vo;
 
 import java.io.Serializable;
 
-import com.lucamartinelli.telegram.bot.comands.BotCommand;
+import com.lucamartinelli.telegram.bot.commands.BotCommand;
 
 public class ChatSession implements Serializable{
 	

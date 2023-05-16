@@ -1,4 +1,4 @@
-package com.lucamartinelli.telegram.bot.comands;
+package com.lucamartinelli.telegram.bot.commands;
 
 import com.lucamartinelli.telegram.bot.comands.admin.login.LoginAdmin;
 import com.lucamartinelli.telegram.bot.comands.calc.CalcCommand;
@@ -12,6 +12,7 @@ import com.lucamartinelli.telegram.bot.comands.calc.SumCommand;
 import com.lucamartinelli.telegram.bot.comands.media.asciiart.AsciiArtCommand;
 import com.lucamartinelli.telegram.bot.comands.mylady.help.MyLadyHelpCommand;
 import com.lucamartinelli.telegram.bot.comands.mylady.login.LoginMyLady;
+import com.lucamartinelli.telegram.bot.comands.mylady.love.LoveCommand;
 import com.lucamartinelli.telegram.bot.comands.random.AphorismCommand;
 import com.lucamartinelli.telegram.bot.comands.random.CoinCommand;
 import com.lucamartinelli.telegram.bot.comands.random.DiceCommand;
@@ -26,6 +27,7 @@ import com.lucamartinelli.telegram.bot.comands.simple.sticker.StickerCommand;
 import com.lucamartinelli.telegram.bot.comands.simple.test.TestCommand;
 import com.lucamartinelli.telegram.bot.comands.simple.time.TimeCommand;
 import com.lucamartinelli.telegram.bot.comands.user.login.LogoutCommand;
+import com.lucamartinelli.telegram.bot.comands.user.login.UserLoginCommand;
 import com.lucamartinelli.telegram.bot.vo.ChatSession;
 import com.pengrad.telegrambot.model.Update;
 
@@ -139,6 +141,8 @@ public class CommandSelector {
         		break;
 
         	case ("/user"): 
+        		command = new UserLoginCommand(session, update);
+        		break;
 
         	case ("/userhelp"):
         		
@@ -154,6 +158,8 @@ public class CommandSelector {
         	case ("/myladyimage"):
 
         	case ("/love"):
+        		command = new LoveCommand(session, update);
+        		break;
         
         	case ("/admin"): 
         		command = new LoginAdmin(session, update);

@@ -1,6 +1,6 @@
 package com.lucamartinelli.telegram.bot.comands.simple.test;
 
-import com.lucamartinelli.telegram.bot.comands.BotCommand;
+import com.lucamartinelli.telegram.bot.commands.BotCommand;
 import com.lucamartinelli.telegram.bot.vo.ChatSession;
 import com.pengrad.telegrambot.model.Update;
 

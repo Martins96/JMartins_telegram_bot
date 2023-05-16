@@ -2,10 +2,11 @@ package com.lucamartinelli.telegram.bot.comands.mylady.login;
 
 import org.eclipse.microprofile.config.ConfigProvider;
 
-import com.lucamartinelli.telegram.bot.comands.BotCommand;
+import com.lucamartinelli.telegram.bot.commands.BotCommand;
 import com.lucamartinelli.telegram.bot.vo.ChatSession;
 import com.lucamartinelli.telegram.bot.vo.LoggedRolesEnum;
 import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.request.DeleteMessage;
 
 public class LoginMyLady extends BotCommand {
 	
@@ -68,6 +69,7 @@ public class LoginMyLady extends BotCommand {
 			chatSession.setLoggedinRole(LoggedRolesEnum.MYLADY);
 			sendMessage(chatID, "Ciao mamma 😄  sono felicissima di sentirti, "
 					+ "ti ricordo che la tua lista dei comandi è /myladyhelp ❤️❤️");
+			ellie.execute(new DeleteMessage(chatID, newUpdate.message().messageId()));
 			return 0;
 		} else {
 			log.debug("Password NOT match, exiting comand");

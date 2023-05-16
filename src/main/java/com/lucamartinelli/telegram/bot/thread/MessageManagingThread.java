@@ -8,8 +8,8 @@ import org.jboss.logging.Logger;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.lucamartinelli.telegram.bot.ApplicationCore;
-import com.lucamartinelli.telegram.bot.comands.BotCommand;
-import com.lucamartinelli.telegram.bot.comands.CommandSelector;
+import com.lucamartinelli.telegram.bot.commands.BotCommand;
+import com.lucamartinelli.telegram.bot.commands.CommandSelector;
 import com.lucamartinelli.telegram.bot.util.Dumper;
 import com.lucamartinelli.telegram.bot.vo.ChatSession;
 import com.pengrad.telegrambot.TelegramBot;
