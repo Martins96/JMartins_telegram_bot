@@ -44,3 +44,4 @@ nb-configuration.xml
 
 # Private
 src/main/resources/commands/love/
+src/main/resources/META-INF/secrets.properties

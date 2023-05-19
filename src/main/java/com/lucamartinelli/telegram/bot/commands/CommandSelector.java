@@ -1,33 +1,34 @@
 package com.lucamartinelli.telegram.bot.commands;
 
-import com.lucamartinelli.telegram.bot.comands.admin.login.LoginAdmin;
-import com.lucamartinelli.telegram.bot.comands.calc.CalcCommand;
-import com.lucamartinelli.telegram.bot.comands.calc.DiffCommand;
-import com.lucamartinelli.telegram.bot.comands.calc.DivCommand;
-import com.lucamartinelli.telegram.bot.comands.calc.MidCommand;
-import com.lucamartinelli.telegram.bot.comands.calc.MultipCommand;
-import com.lucamartinelli.telegram.bot.comands.calc.RandCommand;
-import com.lucamartinelli.telegram.bot.comands.calc.SqrtCommand;
-import com.lucamartinelli.telegram.bot.comands.calc.SumCommand;
-import com.lucamartinelli.telegram.bot.comands.media.asciiart.AsciiArtCommand;
-import com.lucamartinelli.telegram.bot.comands.mylady.help.MyLadyHelpCommand;
-import com.lucamartinelli.telegram.bot.comands.mylady.login.LoginMyLady;
-import com.lucamartinelli.telegram.bot.comands.mylady.love.LoveCommand;
-import com.lucamartinelli.telegram.bot.comands.random.AphorismCommand;
-import com.lucamartinelli.telegram.bot.comands.random.CoinCommand;
-import com.lucamartinelli.telegram.bot.comands.random.DiceCommand;
-import com.lucamartinelli.telegram.bot.comands.random.JokeCommand;
-import com.lucamartinelli.telegram.bot.comands.random.RandCharCommand;
-import com.lucamartinelli.telegram.bot.comands.simple.def.DefaultCommand;
-import com.lucamartinelli.telegram.bot.comands.simple.help.HelpCommand;
-import com.lucamartinelli.telegram.bot.comands.simple.info.InfoCommand;
-import com.lucamartinelli.telegram.bot.comands.simple.pinfo.PersonalInfoCommand;
-import com.lucamartinelli.telegram.bot.comands.simple.start.StartCommand;
-import com.lucamartinelli.telegram.bot.comands.simple.sticker.StickerCommand;
-import com.lucamartinelli.telegram.bot.comands.simple.test.TestCommand;
-import com.lucamartinelli.telegram.bot.comands.simple.time.TimeCommand;
-import com.lucamartinelli.telegram.bot.comands.user.login.LogoutCommand;
-import com.lucamartinelli.telegram.bot.comands.user.login.UserLoginCommand;
+import com.lucamartinelli.telegram.bot.commands.admin.login.LoginAdmin;
+import com.lucamartinelli.telegram.bot.commands.calc.CalcCommand;
+import com.lucamartinelli.telegram.bot.commands.calc.DiffCommand;
+import com.lucamartinelli.telegram.bot.commands.calc.DivCommand;
+import com.lucamartinelli.telegram.bot.commands.calc.MidCommand;
+import com.lucamartinelli.telegram.bot.commands.calc.MultipCommand;
+import com.lucamartinelli.telegram.bot.commands.calc.RandCommand;
+import com.lucamartinelli.telegram.bot.commands.calc.SqrtCommand;
+import com.lucamartinelli.telegram.bot.commands.calc.SumCommand;
+import com.lucamartinelli.telegram.bot.commands.media.asciiart.AsciiArtCommand;
+import com.lucamartinelli.telegram.bot.commands.mylady.help.MyLadyHelpCommand;
+import com.lucamartinelli.telegram.bot.commands.mylady.login.LoginMyLady;
+import com.lucamartinelli.telegram.bot.commands.mylady.love.LoveCommand;
+import com.lucamartinelli.telegram.bot.commands.simple.def.DefaultCommand;
+import com.lucamartinelli.telegram.bot.commands.simple.help.HelpCommand;
+import com.lucamartinelli.telegram.bot.commands.simple.info.InfoCommand;
+import com.lucamartinelli.telegram.bot.commands.simple.pinfo.PersonalInfoCommand;
+import com.lucamartinelli.telegram.bot.commands.simple.start.StartCommand;
+import com.lucamartinelli.telegram.bot.commands.simple.sticker.StickerCommand;
+import com.lucamartinelli.telegram.bot.commands.simple.test.TestCommand;
+import com.lucamartinelli.telegram.bot.commands.simple.time.TimeCommand;
+import com.lucamartinelli.telegram.bot.commands.random.AphorismCommand;
+import com.lucamartinelli.telegram.bot.commands.random.CoinCommand;
+import com.lucamartinelli.telegram.bot.commands.random.DiceCommand;
+import com.lucamartinelli.telegram.bot.commands.random.JokeCommand;
+import com.lucamartinelli.telegram.bot.commands.random.RandCharCommand;
+import com.lucamartinelli.telegram.bot.commands.user.login.LogoutCommand;
+import com.lucamartinelli.telegram.bot.commands.user.login.UserLoginCommand;
+import com.lucamartinelli.telegram.bot.commands.weather.WeatherCommand;
 import com.lucamartinelli.telegram.bot.vo.ChatSession;
 import com.pengrad.telegrambot.model.Update;
 
@@ -194,6 +195,8 @@ public class CommandSelector {
         	case ("/shared"):
         
         	case ("/meteo"):
+        		command = new WeatherCommand(session, update);
+        		break;
         
         	case ("/storia"):
         
