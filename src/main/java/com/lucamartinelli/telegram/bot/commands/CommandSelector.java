@@ -1,5 +1,6 @@
 package com.lucamartinelli.telegram.bot.commands;
 
+import com.lucamartinelli.telegram.bot.commands.admin.help.AdminHelpCommand;
 import com.lucamartinelli.telegram.bot.commands.admin.login.LoginAdmin;
 import com.lucamartinelli.telegram.bot.commands.calc.CalcCommand;
 import com.lucamartinelli.telegram.bot.commands.calc.DiffCommand;
@@ -13,6 +14,7 @@ import com.lucamartinelli.telegram.bot.commands.media.asciiart.AsciiArtCommand;
 import com.lucamartinelli.telegram.bot.commands.mylady.help.MyLadyHelpCommand;
 import com.lucamartinelli.telegram.bot.commands.mylady.login.LoginMyLady;
 import com.lucamartinelli.telegram.bot.commands.mylady.love.LoveCommand;
+import com.lucamartinelli.telegram.bot.commands.mylady.media.MyLadyImageCommand;
 import com.lucamartinelli.telegram.bot.commands.simple.def.DefaultCommand;
 import com.lucamartinelli.telegram.bot.commands.simple.help.HelpCommand;
 import com.lucamartinelli.telegram.bot.commands.simple.info.InfoCommand;
@@ -157,6 +159,8 @@ public class CommandSelector {
     			break;
         
         	case ("/myladyimage"):
+        		command = new MyLadyImageCommand(session, update);
+				break;
 
         	case ("/love"):
         		command = new LoveCommand(session, update);
@@ -167,8 +171,8 @@ public class CommandSelector {
         		break;
 
         	case ("/adminhelp"):
-
-        	case ("/hddlist"):
+        		command = new AdminHelpCommand(session, update);
+				break;
 
         	case ("/adminimage"): 
 

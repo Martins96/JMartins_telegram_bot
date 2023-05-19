@@ -40,6 +40,17 @@ public class Messages {
 			+ "/system\n invia un messaggio pulito ad un utente, per visualizzare più info digita '/system help'\n"
 			+ "/shutdown\nMi mandi a nanna\n"
 			+ "/logout\nRimuovo l'autorizzazione di mylady\n";
+	public static final String ADMIN_HELP = "Lista:\n"
+			+ "/postino\ninvio un messaggio ad un utente, sintassi da seguire:\n/postino 'id destinatario' 'testo del messaggio da inviare'\n"
+			+ "/system\ninvio un messaggio pulito a un utente\n"
+			+ "/adminimage\ninvio un'immagine delle tue...\n"
+			+ "/threadattivi\nvisualizzo i thread attivi\n"
+			+ "/startrandomevent\navvio un nuovo evento casuale\n"
+			+ "/getlog\ninvio il log dell'ultima ora\n"
+			+ "/getellieinfo\ninvio le info di esecuzione di Ellie\n"
+			+ "/cloud\nmodalità di clouding\n"
+			+ "/shutdown\nspegnimento di Ellie\n"
+			+ "/adminexit\nesci dalla lista degli admin ";
 	
 	
 }
