@@ -1,6 +1,7 @@
 package com.lucamartinelli.telegram.bot.vo;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import com.lucamartinelli.telegram.bot.commands.BotCommand;
 
@@ -15,6 +16,7 @@ public class ChatSession implements Serializable{
 	private String username;
 	private boolean commandFlowIncomplete;
 	private BotCommand processingCommand;
+	private boolean commandMultiUser;
 	private LoggedRolesEnum loggedinRole;
 	
 	public ChatSession() {
@@ -22,6 +24,7 @@ public class ChatSession implements Serializable{
 		this.commandFlowIncomplete = false;
 		this.processingCommand = null;
 		this.loggedinRole = null;
+		this.commandMultiUser = false;
 	}
 	
 	
@@ -71,9 +74,45 @@ public class ChatSession implements Serializable{
 	public void setLoggedinRole(LoggedRolesEnum loggedinRole) {
 		this.loggedinRole = loggedinRole;
 	}
-	
-	
-	
+	public boolean isCommandMultiUser() {
+		return commandMultiUser;
+	}
+	public void setCommandMultiUser(boolean commandMultiUser) {
+		this.commandMultiUser = commandMultiUser;
+	}
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(commandFlowIncomplete, commandMultiUser, lastMessageText, lastMessageTime, loggedinRole,
+				processingCommand, userid, username);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ChatSession other = (ChatSession) obj;
+		return commandFlowIncomplete == other.commandFlowIncomplete && commandMultiUser == other.commandMultiUser
+				&& Objects.equals(lastMessageText, other.lastMessageText)
+				&& Objects.equals(lastMessageTime, other.lastMessageTime) && loggedinRole == other.loggedinRole
+				&& Objects.equals(processingCommand, other.processingCommand) && Objects.equals(userid, other.userid)
+				&& Objects.equals(username, other.username);
+	}
+
+
+	@Override
+	public String toString() {
+		return "ChatSession [userid=" + userid + ", lastMessageText=" + lastMessageText + ", lastMessageTime="
+				+ lastMessageTime + ", username=" + username + ", commandFlowIncomplete=" + commandFlowIncomplete
+				+ ", processingCommand=" + processingCommand + ", commandMultiUser=" + commandMultiUser
+				+ ", loggedinRole=" + loggedinRole + "]";
+	}
 	
 	
 }

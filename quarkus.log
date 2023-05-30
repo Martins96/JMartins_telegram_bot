@@ -1,0 +1,4 @@
+10:39:27 INFO  [io.quarkus:109] (Quarkus Main Thread) ellie-telegram-bot 4.0.0 on JVM (powered by Quarkus 3.0.3.Final) started in 1.177s. 
+10:39:27 INFO  [io.quarkus:113] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
+10:39:27 INFO  [io.quarkus:115] (Quarkus Main Thread) Installed features: [cdi, smallrye-context-propagation, smallrye-fault-tolerance]
+10:39:27 INFO  [co.lu.te.bo.ApplicationCore:60] (Quarkus Main Thread) [Ellie] ready to action

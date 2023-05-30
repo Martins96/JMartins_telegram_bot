@@ -5,8 +5,6 @@ import com.lucamartinelli.telegram.bot.vo.ChatSession;
 import com.lucamartinelli.telegram.bot.vo.weather.WeatherDayVO;
 import com.lucamartinelli.telegram.bot.vo.weather.WeatherForecastVO;
 import com.pengrad.telegrambot.model.Update;
-import com.pengrad.telegrambot.model.request.ParseMode;
-import com.pengrad.telegrambot.request.SendMessage;
 
 public class WeatherCommand extends BotCommand {
 
@@ -105,10 +103,9 @@ public class WeatherCommand extends BotCommand {
 		printDay(sb, forecast.getAfterTomorrow());
 		
 		log.debug("Message ready");
-		SendMessage request = new SendMessage(chatID, sb.toString())
-	            .parseMode(ParseMode.HTML);
-		log.debug("Sending message " + request.toString());
-		this.ellie.execute(request);
+		
+		log.debug("Sending message " + sb.toString());
+		sendMessageHTML(chatID, sb.toString());
 		
 		chatSession.resetIncompleteCommand();
 		return 0;

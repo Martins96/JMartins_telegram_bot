@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
+import java.util.Arrays;
 
 import org.jboss.logging.Logger;
 
@@ -12,6 +13,7 @@ import com.lucamartinelli.telegram.bot.ApplicationCore;
 import com.lucamartinelli.telegram.bot.vo.ChatSession;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.model.request.ParseMode;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SendPhoto;
 import com.pengrad.telegrambot.response.SendResponse;
@@ -21,6 +23,7 @@ public abstract class BotCommand {
 	protected final Logger log;
 	protected final TelegramBot ellie;
 	protected final Cache<String, ChatSession> chatCache;
+	protected final String[] args;
 	
 	protected ChatSession chatSession;
 	protected String text;
@@ -41,6 +44,12 @@ public abstract class BotCommand {
 		}
 		this.chatID = update.message().from().id();
 		this.text = update.message().text();
+		
+		if (text != null && text.contains(" ")) {
+			args = text.substring(text.indexOf(" ")+1).split(" ");
+		} else {
+			args = new String[0];
+		}
 	}
 	
 	protected abstract int run();
@@ -68,6 +77,20 @@ public abstract class BotCommand {
 		}
 		log.infof("Sending message to [%s] with text: %s", Long.toString(chatID), text);
 		return this.ellie.execute(new SendMessage(chatID, text));
+	}
+	
+	protected SendResponse sendMessageHTML(Long chatID, String text) {
+		if (chatID < 0) {
+			try {
+				return SendResponse.class.getDeclaredConstructor().newInstance();
+			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+					| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+				log.error("Failed create dummy SendResponse", e);
+				return null;
+			}
+		}
+		log.infof("Sending message as HTML to [%s] with text: %s", Long.toString(chatID), text);
+		return this.ellie.execute(new SendMessage(chatID, text).parseMode(ParseMode.HTML));
 	}
 	
 	protected SendResponse sendPhoto(Long chatID, File photo) {
@@ -99,5 +122,12 @@ public abstract class BotCommand {
 		
 		return -1;
 	}
+
+	@Override
+	public String toString() {
+		return "BotCommand [text=" + text + ", chatID=" + chatID + "]";
+	}
+	
+	
 	
 }

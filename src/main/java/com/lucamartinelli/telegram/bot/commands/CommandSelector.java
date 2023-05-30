@@ -1,7 +1,10 @@
 package com.lucamartinelli.telegram.bot.commands;
 
+import com.lucamartinelli.telegram.bot.commands.admin.ellieinfo.EllieInfoCommand;
+import com.lucamartinelli.telegram.bot.commands.admin.getlog.GetLogCommand;
 import com.lucamartinelli.telegram.bot.commands.admin.help.AdminHelpCommand;
 import com.lucamartinelli.telegram.bot.commands.admin.login.LoginAdmin;
+import com.lucamartinelli.telegram.bot.commands.admin.shutdown.ShutdownCommand;
 import com.lucamartinelli.telegram.bot.commands.calc.CalcCommand;
 import com.lucamartinelli.telegram.bot.commands.calc.DiffCommand;
 import com.lucamartinelli.telegram.bot.commands.calc.DivCommand;
@@ -10,6 +13,7 @@ import com.lucamartinelli.telegram.bot.commands.calc.MultipCommand;
 import com.lucamartinelli.telegram.bot.commands.calc.RandCommand;
 import com.lucamartinelli.telegram.bot.commands.calc.SqrtCommand;
 import com.lucamartinelli.telegram.bot.commands.calc.SumCommand;
+import com.lucamartinelli.telegram.bot.commands.games.morra.MorraCommand;
 import com.lucamartinelli.telegram.bot.commands.media.asciiart.AsciiArtCommand;
 import com.lucamartinelli.telegram.bot.commands.mylady.help.MyLadyHelpCommand;
 import com.lucamartinelli.telegram.bot.commands.mylady.login.LoginMyLady;
@@ -30,6 +34,7 @@ import com.lucamartinelli.telegram.bot.commands.random.JokeCommand;
 import com.lucamartinelli.telegram.bot.commands.random.RandCharCommand;
 import com.lucamartinelli.telegram.bot.commands.user.login.LogoutCommand;
 import com.lucamartinelli.telegram.bot.commands.user.login.UserLoginCommand;
+import com.lucamartinelli.telegram.bot.commands.user.mail.MailingCommand;
 import com.lucamartinelli.telegram.bot.commands.weather.WeatherCommand;
 import com.lucamartinelli.telegram.bot.vo.ChatSession;
 import com.pengrad.telegrambot.model.Update;
@@ -174,25 +179,23 @@ public class CommandSelector {
         		command = new AdminHelpCommand(session, update);
 				break;
 
-        	case ("/adminimage"): 
-
         	case ("/shutdown"):
-        
-        	case ("/cloud"):
-
-        	case ("/resettimeout"): 
+        		command = new ShutdownCommand(session, update);
+				break;
 
         	case ("/postino"): 
+        		command = new MailingCommand(session, update);
+				break;
 
         	case ("/system"): 
         
-        	case ("/upgrade"):
-        
         	case ("/getlog"):
+        		command = new GetLogCommand(session, update);
+    			break;
         
         	case ("/getellieinfo"):
-        
-        	case ("/threadattivi"):
+        		command = new EllieInfoCommand(session, update);
+        		break;
         
         	case ("/startrandomevent"):
         
@@ -213,6 +216,8 @@ public class CommandSelector {
         	case ("/battaglianavale"):
         
         	case ("/sassocartaforbice"):
+        		command = new MorraCommand(session, update);
+        		break;
 
         	case ("/catsimulator"):
 

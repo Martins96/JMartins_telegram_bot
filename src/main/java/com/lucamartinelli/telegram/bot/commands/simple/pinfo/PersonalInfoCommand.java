@@ -15,16 +15,23 @@ public class PersonalInfoCommand extends BotCommand {
 	protected int run() {
 		final Message messaggio = update.message();
 		final StringBuffer sb = new StringBuffer();
+		final String loggedRole = chatSession.getLoggedinRole() == null ?
+				"No" : chatSession.getLoggedinRole().toString();
+		
+		
 		sb.append("Informazioni personali chat: \n ")
-			.append("\n\bID Chat\b\n").append(messaggio.chat().id())
-			.append("\n\n\bID Utente\b\n").append(messaggio.from().id())
-			.append("\n\n\bNome Utente\b\n").append(messaggio.from().firstName())
-			.append("\n\n\bCognome Utente\b\n").append(messaggio.from().lastName())
-			.append("\n\n\bUsername Utente\b\n").append(messaggio.from().username())
-			.append("\n\n\bUtente Premium\b\n").append(messaggio.from().isPremium())
-			.append("\n\n\bFirma\b\n").append(messaggio.authorSignature())
+			.append("\n<b>ID Chat</b>\n").append(messaggio.chat().id())
+			.append("\n\n<b>ID Utente</b>\n").append(messaggio.from().id())
+			.append("\n\n<b>Nome Utente</b>\n").append(messaggio.from().firstName())
+			.append("\n\n<b>Cognome Utente</b>\n").append(messaggio.from().lastName())
+			.append("\n\n<b>Username Utente</b>\n").append(messaggio.from().username())
+			.append("\n\n<b>Utente Premium</b>\n").append(messaggio.from().isPremium())
+			.append("\n\n<b>Firma</b>\n").append(messaggio.authorSignature())
+			.append("\n\n<b>Firma</b>\n").append(messaggio.authorSignature())
+			.append("\n\n<b><i>INFO SESSIONE</i></b>\n")
+			.append("\n\n<b>Loggato</b>\n").append(loggedRole)
 			;
-		sendMessage(chatID, sb.toString());
+		sendMessageHTML(chatID, sb.toString());
 		return 0;
 	}
 
